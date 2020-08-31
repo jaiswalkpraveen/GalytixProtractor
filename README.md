@@ -10,7 +10,7 @@ We ask you to include the  test plan:
 
 - The “Browse jobs” page
 - All the pages behind the links in the central section of the page (6 links – one for each job)  
-- The job application process for each individual job advertised on the website. “Apply Now” button and the pop-up form.
+- The job application process for each individual job advertised on the website. “Apply Now” button and the pop-up form. (Go ahead and submit the form, this is just a test app, the request doesn't go anywhere)
 
 Once the test plan is ready please use protractor, or any other javascript automation testing framework you are comfortable with, to create tests. 
 
@@ -21,8 +21,6 @@ Your tests should be added to a public git repository with the instructions on h
 Please aim to complete this exercise in three hours. 
 
 Please share the link to the repository when the assignment is complete. 
-
-Please do not worry about submitting “test” job applications, this is just a frontend app.
 
 We wish you best of luck.
 
