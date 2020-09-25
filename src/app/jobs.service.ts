@@ -49,10 +49,34 @@ const jobs = [
     location: 'Gurgaon, India',
     date: '2020-07-22',
     id: 8
+  },
+  {
+    title: 'Sr. Front End Developer',
+    location: 'London, UK',
+    date: '2020-07-22',
+    id: 9
+  },
+  {
+    title: 'Sr. Front End Developer',
+    location: 'Gurgaon, India',
+    date: '2020-07-22',
+    id: 10
+  },
+  {
+    title: 'Sr. Front End Developer',
+    location: 'London, UK',
+    date: '2020-07-22',
+    id: 11
+  },
+  {
+    title: 'Sr. Front End Developer',
+    location: 'Gurgaon, India',
+    date: '2020-07-22',
+    id: 12
   }
 ];
 
-const fewerJobs = jobs.slice(0, 6);
+const jobsToReturn = Math.random() > 0.5 ? jobs : jobs.slice(0, 6);
 
 @Injectable({
   providedIn: 'root'
@@ -60,22 +84,18 @@ const fewerJobs = jobs.slice(0, 6);
 export class JobsService {
 
   getJobs() {
-    if (Math.random() > 0.5) {
-      return of(jobs);
-    } else {
-      return of(fewerJobs);
-    }
+    return of(jobsToReturn);
   }
 
   getJob(jobId) {
-    return of(jobs.find(({id}) => id===jobId));
+    return of(jobs.find(({ id }) => id === jobId));
   }
 
   applyToJob(id) {
-    if (id===5) {
-      return of({success: false});
+    if (id === 5) {
+      return of({ success: false });
     }
-    return of({success: true});
+    return of({ success: true });
   }
 
   constructor() { }
