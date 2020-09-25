@@ -4,13 +4,13 @@ Dear candidate,
 
 For the second phase of the interview process we would like to ask you to attempt a short assignment that would help us to evaluate your test-planning and automation skills.
 
-You will be required to create a high level test-plan for this angular app
+You will be required to create a high level test-plan for this angular app.
 
 We ask you to include the  test plan:
 
 - The “Browse jobs” page
-- All the pages behind the links in the central section of the page (6 links – one for each job)  
-- The job application process for each individual job advertised on the website. “Apply Now” button and the pop-up form. (Go ahead and submit the form, this is just a test app, the request doesn't go anywhere)
+- All the pages behind the links in the central section of the page (Please note that the list of jobs changes randomly when reloading the page.  Please think about how to test an unknown number of items)  
+- The job application process for each job advertised on the website. “Apply Now” button and the pop-up form. (Go ahead and submit the form, this is just a test app, the request doesn't go anywhere)
 
 Once the test plan is ready please use protractor, or any other javascript automation testing framework you are comfortable with, to create tests. 
 

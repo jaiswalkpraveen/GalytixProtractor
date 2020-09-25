@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 const jobs = [
   {
@@ -23,7 +23,7 @@ const jobs = [
   {
     title: 'Testing Engineer',
     location: 'London, UK',
-    date: '2020-07-20',
+    date: '2020-07-18',
     id: 4
   },
   {
@@ -35,10 +35,24 @@ const jobs = [
   {
     title: 'Sr. Web Designer',
     location: 'Gurgaon, India',
-    date: '2020-07-20',
+    date: '2020-07-19',
     id: 6
+  },
+  {
+    title: 'Sr. Front End Developer',
+    location: 'London, UK',
+    date: '2020-07-22',
+    id: 7
+  },
+  {
+    title: 'Sr. Front End Developer',
+    location: 'Gurgaon, India',
+    date: '2020-07-22',
+    id: 8
   }
 ];
+
+const fewerJobs = jobs.slice(0, 6);
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +60,11 @@ const jobs = [
 export class JobsService {
 
   getJobs() {
-    return of(jobs);
+    if (Math.random() > 0.5) {
+      return of(jobs);
+    } else {
+      return of(fewerJobs);
+    }
   }
 
   getJob(jobId) {
