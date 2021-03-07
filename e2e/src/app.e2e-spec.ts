@@ -13,23 +13,22 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getPageHeader()).toEqual('BROWSE JOBS')
+    expect(page.getPageHeader()).toEqual(`${pageHeader}`)
   });
 
   it('should have working anchor tag', () => {
     element(by.tagName('ul')).all(by.tagName('li > a'))
       .each((job, index) => {
-        if (index === 0)
-          if (job != undefined && job.getText != null) {
-            job.getAttribute('href').then((jobLink) => {
-              expect(jobLink).toEqual(`${jobUrl + (index + 1)}`)
-              job.click()
-              expect(browser.getCurrentUrl()).toEqual(`${jobUrl + (index + 1)}`);
-              page.navigateBack()
-              expect(browser.getCurrentUrl()).toEqual(`${jobUrl.slice(0, -1) + 's'}`);
-              expect(page.getPageHeader()).toEqual(`${pageHeader}`)
-            });
-          }
+        if (job != undefined && job.getText != null) {
+          job.getAttribute('href').then((jobLink) => {
+            expect(jobLink).toEqual(`${jobUrl + (index + 1)}`)
+            job.click()
+            expect(browser.getCurrentUrl()).toEqual(`${jobUrl + (index + 1)}`);
+            page.navigateBack()
+            expect(browser.getCurrentUrl()).toContain(`${jobUrl.slice(0, -1) + 's'}`);
+            expect(page.getPageHeader()).toEqual(`${pageHeader}`)
+          });
+        }
       });
   });
 
@@ -38,10 +37,10 @@ describe('workspace-project App', () => {
       .each((job, index) => {
         if (index === 0)
           if (job != undefined && job.getText != null) {
-            expect(browser.getCurrentUrl()).toEqual(`${jobUrl.slice(0, -1) + 's'}`);
+            expect(browser.getCurrentUrl()).toContain(`${jobUrl.slice(0, -1) + 's'}`);
             expect(page.getPageHeader()).toEqual(`${pageHeader}`)
             job.click()
-            expect(browser.getCurrentUrl()).toEqual(`http://localhost:4200/job/${index + 1}`);
+            expect(browser.getCurrentUrl()).toEqual(`${jobUrl + (index + 1)}`);
             element(by.tagName('button')).click()
             page.fillApplicationForm();
             expect(page.getApplicationStatus()).toEqual(`${applicationStatus}`)

@@ -1,5 +1,6 @@
 # Galytix QA Exercise
-
+Here is the test plan : https://bit.ly/30lIxYE
+For now, I have only wrote automated script for positive scenario due to time constraints.
 
 # Instructions:
 
