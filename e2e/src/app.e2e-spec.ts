@@ -1,6 +1,8 @@
 import { AppPage } from './app.po';
 import { browser, logging, by, element, ElementFinder, ElementArrayFinder } from 'protractor';
 var jobUrl = 'http://localhost:4200/job/'
+var pageHeader = 'BROWSE JOBS'
+var applicationStatus = 'Application submitted'
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -24,8 +26,8 @@ describe('workspace-project App', () => {
               job.click()
               expect(browser.getCurrentUrl()).toEqual(`${jobUrl + (index + 1)}`);
               page.navigateBack()
-              expect(browser.getCurrentUrl()).toContain(`${jobUrl.slice(0, -1) + 's'}`);
-              expect(page.getPageHeader()).toEqual('BROWSE JOBS')
+              expect(browser.getCurrentUrl()).toEqual(`${jobUrl.slice(0, -1) + 's'}`);
+              expect(page.getPageHeader()).toEqual(`${pageHeader}`)
             });
           }
       });
@@ -34,16 +36,17 @@ describe('workspace-project App', () => {
   it('perform end to end application submission', () => {
     element(by.tagName('ul')).all(by.tagName('li > a'))
       .each((job, index) => {
-        if (job != undefined && job.getText != null) {
-          expect(browser.getCurrentUrl()).toEqual(`http://localhost:4200/jobs`);
-          expect(page.getPageHeader()).toEqual('BROWSE JOBS')
-          job.click()
-          expect(browser.getCurrentUrl()).toEqual(`http://localhost:4200/job/${index + 1}`);
-          element(by.tagName('button')).click()
-          page.fillApplicationForm();
-          expect(page.getApplicationStatus()).toEqual('Application submitted')
-          page.navigateBack()
-        }
+        if (index === 0)
+          if (job != undefined && job.getText != null) {
+            expect(browser.getCurrentUrl()).toEqual(`${jobUrl.slice(0, -1) + 's'}`);
+            expect(page.getPageHeader()).toEqual(`${pageHeader}`)
+            job.click()
+            expect(browser.getCurrentUrl()).toEqual(`http://localhost:4200/job/${index + 1}`);
+            element(by.tagName('button')).click()
+            page.fillApplicationForm();
+            expect(page.getApplicationStatus()).toEqual(`${applicationStatus}`)
+            page.navigateBack()
+          }
       });
   });
 
