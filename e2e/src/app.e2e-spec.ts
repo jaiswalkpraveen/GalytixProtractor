@@ -17,19 +17,14 @@ describe('workspace-project App', () => {
   });
 
   it('should have working anchor tag', () => {
-    element(by.tagName('ul')).all(by.tagName('li > a'))
-      .each((job, index) => {
-        if (job != undefined && job.getText != null) {
-          job.getAttribute('href').then((jobLink) => {
-            expect(jobLink).toEqual(`${jobUrl + (index + 1)}`)
-            job.click()
-            expect(browser.getCurrentUrl()).toEqual(`${jobUrl + (index + 1)}`);
-            page.navigateBack()
-            expect(browser.getCurrentUrl()).toContain(`${jobUrl.slice(0, -1) + 's'}`);
-            expect(page.getPageHeader()).toEqual(`${pageHeader}`)
-          });
-        }
-      });
+    element(by.tagName('ul')).all(by.tagName('li > a')).map(function (link) {
+      return link.getAttribute('href');
+    }).then(function (links) {
+      for (let index = 0; index < links.length; index++) {
+        browser.get(`${links[index]}`);
+        expect(browser.getCurrentUrl()).toEqual(`${jobUrl + (index + 1)}`);
+      }
+    });
   });
 
   it('perform end to end application submission', () => {
@@ -49,10 +44,7 @@ describe('workspace-project App', () => {
       });
   });
 
-
-
   afterEach(async () => {
-    browser.driver.sleep(3000);
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(jasmine.objectContaining({

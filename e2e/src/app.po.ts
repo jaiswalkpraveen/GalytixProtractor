@@ -37,6 +37,4 @@ export class AppPage {
     applyNowButton.click();
     return element(by.className('success')).getText() as Promise<string>;
   }
-
-
 }
