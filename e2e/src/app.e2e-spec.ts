@@ -36,7 +36,7 @@ describe('workspace-project App', () => {
             expect(page.getPageHeader()).toEqual(`${pageHeader}`)
             job.click()
             expect(browser.getCurrentUrl()).toEqual(`${jobUrl + (index + 1)}`);
-            element(by.tagName('button')).click()
+            page.applyNow();
             page.fillApplicationForm();
             expect(page.getApplicationStatus()).toEqual(`${applicationStatus}`)
             page.navigateBack()

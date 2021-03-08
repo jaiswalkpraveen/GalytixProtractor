@@ -10,6 +10,12 @@ export class AppPage {
     return browser.navigate().back() as Promise<unknown>;
   }
 
+  applyNow() {
+    element(by.tagName('button')).click();
+  }
+
+
+
   getPageHeader(): Promise<string> {
     return element(by.tagName('h1')).getText() as Promise<string>;
   }
